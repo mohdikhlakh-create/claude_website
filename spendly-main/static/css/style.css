@@ -591,6 +591,10 @@ a { color: inherit; text-decoration: none; }
     line-height: 1.8;
 }
 
+.terms-inner a {
+    color: var(--accent);
+}
+
 /* ------------------------------------------------------------------ */
 /* ------------------------------------------------------------------ */
 /* Global flash messages                                               */
