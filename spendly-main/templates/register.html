@@ -15,6 +15,11 @@
         </div>
 
         <div class="auth-card">
+            {% with messages = get_flashed_messages(category_filter=["error"]) %}
+              {% for message in messages %}
+              <div class="auth-error" role="alert">{{ message }}</div>
+              {% endfor %}
+            {% endwith %}
             <form method="POST" action="{{ url_for('register') }}">
                 <div class="form-group">
                     <label for="name">Full name</label>

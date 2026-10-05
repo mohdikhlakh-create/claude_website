@@ -85,7 +85,7 @@ def register():
             return render_template("register.html")
 
         if password != confirm_password:
-            flash("Passwords do not match.", "error")
+            flash("Passwords did not match.", "error")
             return render_template("register.html")
 
         try:
