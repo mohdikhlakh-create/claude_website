@@ -1,37 +1,6 @@
 /* static/css/profile.css */
 
 /* ------------------------------------------------------------------ */
-/* Category colour tokens (extends the global design system)           */
-/* ------------------------------------------------------------------ */
-
-:root {
-    --cat-food:             var(--accent);
-    --cat-food-bg:          var(--accent-light);
-    --cat-transport:        var(--accent-2);
-    --cat-transport-bg:     var(--accent-2-light);
-    --cat-bills:            #5b7fa6;
-    --cat-bills-bg:         #e8ecf4;
-    --cat-health:           #b94040;
-    --cat-health-bg:        #fef0f0;
-    --cat-entertainment:    #8b5e83;
-    --cat-entertainment-bg: #f0ebf4;
-    --cat-shopping:         var(--accent-2);
-    --cat-shopping-bg:      var(--accent-2-light);
-    --cat-other:            var(--ink-faint);
-    --cat-other-bg:         var(--border-soft);
-}
-
-/* ------------------------------------------------------------------ */
-/* Navbar username                                                      */
-/* ------------------------------------------------------------------ */
-
-.nav-username {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--ink-soft);
-}
-
-/* ------------------------------------------------------------------ */
 /* Page layout                                                          */
 /* ------------------------------------------------------------------ */
 
@@ -57,7 +26,11 @@
     background: var(--paper-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-card);
+}
+
+.profile-section {
+    min-width: 0;
 }
 
 /* ------------------------------------------------------------------ */
@@ -67,13 +40,16 @@
 .profile-header-card {
     display: flex;
     align-items: center;
-    gap: 1.75rem;
-    padding: 2rem;
+    gap: var(--space-4);
+    padding: var(--space-5);
 }
 
 .profile-add-btn {
     margin-left: auto;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
 }
 
 .profile-avatar {
@@ -101,12 +77,19 @@
 .profile-email {
     font-size: 0.9rem;
     color: var(--ink-muted);
-    margin-bottom: 0.35rem;
+    margin-bottom: var(--space-1);
 }
 
 .profile-since {
     font-size: 0.8rem;
     color: var(--ink-faint);
+}
+
+.profile-email,
+.profile-since {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
 }
 
 /* ------------------------------------------------------------------ */
@@ -116,17 +99,20 @@
 .profile-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: var(--space-3);
 }
 
 .stat-card {
-    padding: 1.5rem 2rem;
+    padding: var(--space-4) var(--space-5);
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-2);
 }
 
 .stat-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     font-size: 0.72rem;
     font-weight: 600;
     color: var(--ink-muted);
@@ -154,15 +140,15 @@
 }
 
 .profile-section {
-    padding: 1.75rem;
+    padding: var(--space-4);
 }
 
 .section-title-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
     border-bottom: 1px solid var(--border-soft);
 }
 
@@ -173,6 +159,9 @@
 }
 
 .section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     font-family: var(--font-display);
     font-size: 1.15rem;
     color: var(--ink);
@@ -207,7 +196,7 @@
 }
 
 .tx-table td {
-    padding: 0.8rem 0.75rem;
+    padding: 12px;
     border-bottom: 1px solid var(--border-soft);
     color: var(--ink-soft);
     vertical-align: middle;
@@ -243,6 +232,33 @@
     white-space: nowrap;
 }
 
+.tx-actions {
+    white-space: nowrap;
+}
+
+.tx-edit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+}
+
+.tx-edit-link:hover {
+    color: var(--accent);
+}
+
+.tx-delete-form {
+    display: inline;
+}
+
+.tx-delete-form .btn-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
 /* ------------------------------------------------------------------ */
 /* Category badges                                                      */
 /* ------------------------------------------------------------------ */
@@ -271,14 +287,14 @@
 .category-list {
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
+    gap: var(--space-3);
 }
 
 .cat-row-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.4rem;
+    margin-bottom: var(--space-2);
 }
 
 .cat-row-name {
@@ -293,27 +309,57 @@
     font-variant-numeric: tabular-nums;
 }
 
-.cat-bar-track {
+.cat-bar {
+    --bar-color: var(--accent);
+    display: block;
+    width: 100%;
     height: 6px;
-    background: var(--border-soft);
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
     border-radius: 999px;
     overflow: hidden;
+    background: var(--border-soft);
 }
 
-.cat-bar {
-    height: 100%;
+/* WebKit and Gecko pseudo-elements must live in separate rules */
+.cat-bar::-webkit-progress-bar {
+    background: var(--border-soft);
     border-radius: 999px;
-    background: var(--accent);
-    transition: width 0.6s ease;
 }
 
-.cat-bar--food          { background: var(--cat-food);          }
-.cat-bar--transport     { background: var(--cat-transport);     }
-.cat-bar--bills         { background: var(--cat-bills);         }
-.cat-bar--health        { background: var(--cat-health);        }
-.cat-bar--entertainment { background: var(--cat-entertainment); }
-.cat-bar--shopping      { background: var(--cat-shopping);      }
-.cat-bar--other         { background: var(--cat-other);         }
+.cat-bar::-webkit-progress-value {
+    background: var(--bar-color);
+    border-radius: 999px;
+}
+
+.cat-bar::-moz-progress-bar {
+    background: var(--bar-color);
+    border-radius: 999px;
+}
+
+.cat-bar--food          { --bar-color: var(--cat-food);          }
+.cat-bar--transport     { --bar-color: var(--cat-transport);     }
+.cat-bar--bills         { --bar-color: var(--cat-bills);         }
+.cat-bar--health        { --bar-color: var(--cat-health);        }
+.cat-bar--entertainment { --bar-color: var(--cat-entertainment); }
+.cat-bar--shopping      { --bar-color: var(--cat-shopping);      }
+.cat-bar--other         { --bar-color: var(--cat-other);         }
+
+.cat-empty {
+    text-align: center;
+    padding: var(--space-4) 0;
+    color: var(--ink-faint);
+    font-size: 0.875rem;
+}
+
+/* Muted icons inside labels and headings */
+.stat-label .icon,
+.section-title .icon,
+.profile-email .icon,
+.profile-since .icon {
+    color: var(--ink-faint);
+}
 
 /* ------------------------------------------------------------------ */
 /* Responsive                                                           */
@@ -329,6 +375,12 @@
     }
 }
 
+@media (max-width: 768px) {
+    .tx-table {
+        min-width: 560px;
+    }
+}
+
 @media (max-width: 640px) {
     .profile-page {
         padding: 2rem 1rem 3rem;
@@ -337,7 +389,16 @@
     .profile-header-card {
         flex-direction: column;
         text-align: center;
-        padding: 1.5rem;
+        padding: var(--space-4);
+    }
+
+    .profile-add-btn {
+        margin-left: 0;
+    }
+
+    .profile-email,
+    .profile-since {
+        justify-content: center;
     }
 
     .profile-stats {
@@ -357,8 +418,8 @@
     background: var(--paper-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    padding: 1rem 1.5rem;
+    box-shadow: var(--shadow-card);
+    padding: var(--space-3) var(--space-4);
     display: flex;
     align-items: center;
     flex-wrap: wrap;

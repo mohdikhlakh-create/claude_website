@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="https://unpkg.com/lucide@1.52.0/dist/umd/lucide.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -22,7 +23,8 @@
                 {% if session.user_id %}
                 <a href="{{ url_for('analytics') }}" class="{{ 'nav-link-active' if request.endpoint == 'analytics' else '' }}">Analytics</a>
                 <a href="{{ url_for('profile') }}" class="{{ 'nav-link-active' if request.endpoint == 'profile' else '' }}">Dashboard</a>
-                <a href="{{ url_for('logout') }}">Sign out</a>
+                <span class="nav-username">{{ session.user_name }}</span>
+                <a href="{{ url_for('logout') }}" class="nav-signout">Sign out</a>
                 {% else %}
                 <a href="{{ url_for('login') }}">Sign in</a>
                 <a href="{{ url_for('register') }}" class="nav-cta">Get started</a>

@@ -16,10 +16,16 @@
             <div class="profile-avatar">{{ user.initials }}</div>
             <div class="profile-info">
                 <h1 class="profile-name">{{ user.name }}</h1>
-                <p class="profile-email">{{ user.email }}</p>
-                <p class="profile-since">Member since {{ user.member_since }}</p>
+                <p class="profile-email">
+                    <i data-lucide="mail" class="icon icon--sm" aria-hidden="true"></i>{{ user.email }}
+                </p>
+                <p class="profile-since">
+                    <i data-lucide="calendar" class="icon icon--sm" aria-hidden="true"></i>Member since {{ user.member_since }}
+                </p>
             </div>
-            <a href="{{ url_for('add_expense') }}" class="btn-primary profile-add-btn">+ Add Expense</a>
+            <a href="{{ url_for('add_expense') }}" class="btn-primary profile-add-btn">
+                <i data-lucide="plus" class="icon icon--sm" aria-hidden="true"></i>Add Expense
+            </a>
         </div>
 
         <!-- Filter bar -->
@@ -56,15 +62,15 @@
         <!-- Summary stats row -->
         <div class="profile-stats">
             <div class="stat-card">
-                <span class="stat-label">Total Spent</span>
+                <span class="stat-label"><i data-lucide="wallet" class="icon icon--sm" aria-hidden="true"></i>Total Spent</span>
                 <span class="stat-value">₹{{ stats.total }}</span>
             </div>
             <div class="stat-card">
-                <span class="stat-label">Transactions</span>
+                <span class="stat-label"><i data-lucide="receipt" class="icon icon--sm" aria-hidden="true"></i>Transactions</span>
                 <span class="stat-value">{{ stats.count }}</span>
             </div>
             <div class="stat-card">
-                <span class="stat-label">Top Category</span>
+                <span class="stat-label"><i data-lucide="tag" class="icon icon--sm" aria-hidden="true"></i>Top Category</span>
                 <span class="stat-value">{{ stats.top_category }}</span>
             </div>
         </div>
@@ -75,7 +81,7 @@
             <!-- Transaction history table -->
             <div class="profile-section">
                 <div class="section-title-row">
-                    <h2 class="section-title">Recent Transactions</h2>
+                    <h2 class="section-title"><i data-lucide="list" class="icon icon--md" aria-hidden="true"></i>Recent Transactions</h2>
                 </div>
                 <div class="tx-table-wrapper">
                     <table class="tx-table">
@@ -100,11 +106,11 @@
                                 </td>
                                 <td class="tx-amount">₹{{ tx.amount }}</td>
                                 <td class="tx-actions">
-                                    <a href="{{ url_for('edit_expense', id=tx.id) }}" class="tx-edit-link">Edit</a>
+                                    <a href="{{ url_for('edit_expense', id=tx.id) }}" class="tx-edit-link"><i data-lucide="pencil" class="icon icon--sm" aria-hidden="true"></i>Edit</a>
                                     <form method="POST" action="{{ url_for('delete_expense', id=tx.id) }}"
-                                          style="display:inline"
+                                          class="tx-delete-form"
                                           onsubmit="return confirm('Delete this expense?')">
-                                        <button type="submit" class="btn-delete">Delete</button>
+                                        <button type="submit" class="btn-delete"><i data-lucide="trash-2" class="icon icon--sm" aria-hidden="true"></i>Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -121,7 +127,9 @@
 
             <!-- Category breakdown -->
             <div class="profile-section">
-                <h2 class="section-title">By Category</h2>
+                <div class="section-title-row">
+                    <h2 class="section-title"><i data-lucide="pie-chart" class="icon icon--md" aria-hidden="true"></i>By Category</h2>
+                </div>
                 <div class="category-list">
                     {% for cat in categories %}
                     <div class="cat-row">
@@ -129,11 +137,12 @@
                             <span class="cat-row-name">{{ cat.name }}</span>
                             <span class="cat-row-amount">₹{{ cat.amount }}</span>
                         </div>
-                        <div class="cat-bar-track">
-                            <div class="cat-bar cat-bar--{{ cat.name | lower }}"
-                                 style="width: {{ cat.percent }}%"></div>
-                        </div>
+                        <progress class="cat-bar cat-bar--{{ cat.name | lower }}"
+                                  value="{{ cat.percent }}" max="100"
+                                  aria-label="{{ cat.name }} {{ cat.percent }}%"></progress>
                     </div>
+                    {% else %}
+                    <p class="cat-empty">No spending in this period.</p>
                     {% endfor %}
                 </div>
             </div>

@@ -28,6 +28,31 @@
     --radius-sm: 6px;
     --radius-md: 12px;
     --radius-lg: 20px;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 32px;
+    --space-6: 48px;
+
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+
+    /* Category colours */
+    --cat-food:             var(--accent);
+    --cat-food-bg:          var(--accent-light);
+    --cat-transport:        var(--accent-2);
+    --cat-transport-bg:     var(--accent-2-light);
+    --cat-bills:            #5b7fa6;
+    --cat-bills-bg:         #e8ecf4;
+    --cat-health:           #b94040;
+    --cat-health-bg:        #fef0f0;
+    --cat-entertainment:    #8b5e83;
+    --cat-entertainment-bg: #f0ebf4;
+    --cat-shopping:         var(--accent-2);
+    --cat-shopping-bg:      var(--accent-2-light);
+    --cat-other:            var(--ink-faint);
+    --cat-other-bg:         var(--border-soft);
 }
 
 /* ------------------------------------------------------------------ */
@@ -103,7 +128,20 @@ a { color: inherit; text-decoration: none; }
 .nav-links a { color: var(--ink-muted); transition: color 0.2s; }
 .nav-links a:hover { color: var(--ink); }
 .nav-link-active { color: var(--accent) !important; font-weight: 500; }
-.nav-username { color: var(--ink) !important; font-weight: 600; }
+.nav-username { color: var(--ink); font-size: 0.85rem; font-weight: 600; }
+
+/* ------------------------------------------------------------------ */
+/* Icons (Lucide copies these classes onto the rendered <svg>)         */
+/* ------------------------------------------------------------------ */
+
+.icon {
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: -0.125em;
+}
+
+.icon--sm { width: 16px; height: 16px; }
+.icon--md { width: 20px; height: 20px; }
 
 .nav-cta {
     background: var(--ink) !important;
@@ -632,6 +670,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 600px) {
-    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-links a:not(.nav-cta):not(.nav-signout) { display: none; }
+    .nav-username { display: none; }
     .hero { padding: 3rem 1rem 2rem; }
 }

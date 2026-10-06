@@ -93,13 +93,16 @@ pytest -s
 | Route | Status |
 |---|---|
 | `GET /` | Implemented — renders `landing.html` |
-| `GET /register` | Implemented — renders `register.html` |
-| `GET /login` | Implemented — renders `login.html` |
-| `GET /logout` | Stub — Step 3 |
-| `GET /profile` | Stub — Step 4 |
-| `GET /expenses/add` | Stub — Step 7 |
-| `GET /expenses/<id>/edit` | Stub — Step 8 |
-| `GET /expenses/<id>/delete` | Stub — Step 9 |
+| `GET, POST /register` | Implemented — Step 2 — renders `register.html` |
+| `GET, POST /login` | Implemented — Step 3 — renders `login.html` |
+| `GET /logout` | Implemented — Step 3 — clears session, redirects to landing |
+| `GET /terms` | Implemented — renders `terms.html` |
+| `GET /privacy` | Implemented — renders `privacy.html` |
+| `GET /profile` | Implemented — Steps 4–6 — renders `profile.html` (date filters) |
+| `GET /analytics` | Implemented — renders `analytics.html` |
+| `GET, POST /expenses/add` | Implemented — Step 7 — renders `add_expense.html` |
+| `GET, POST /expenses/<id>/edit` | Implemented — Step 8 — renders `edit_expense.html` |
+| `POST /expenses/<id>/delete` | Implemented — Step 9 |
 
 **Do not implement a stub route unless the active task explicitly targets that step.**
 
